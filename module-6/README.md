@@ -45,16 +45,10 @@ ENTRYPOINT ["dotnet", "VLanMigrate.dll"]
 ```
 _To understand the DockerFile structure and why those commands are required in the file, Refer to  <a href="#appendix-b">**Appendix B**</a> for more information._
 
-The next step is to run the application in a container and first thing to do is to create the container image file for the project, using the docker file. From your Prompt, go to the project folder where the Dockerfile resides and run the following command:
+The next step is to run the application in a container and first thing to do is to create the container image file for the project, using the DockerFile. From your Prompt, go to the project folder where the Dockerfile resides and run the following command:
 
 ```shell
 docker build -t vlanimage -f Dockerfile .
-```
-
-Docker will process each line in the Dockerfile. The . in the docker build command tells Docker to use the current folder to find a Dockerfile. This command builds the image and creates a local repository named "vlanimage" that points to that image. After this command finishes, run docker images to see a list of images installed:
-
-```shell
-docker images
 ```
 
 Tips:
@@ -62,6 +56,13 @@ Tips:
 _The above build command will throw error. The docker command is unable to find the project dependency. Think about how you this issue can be fixed. Refer to  <a href="#appendix-a">**Appendix A**</a> for the solution._
 
 _You might see errors like 'duplicate assembly information', which is caused by the presence of an AssemblyInfo.cs file in your project having updated from .NET to .NET Core. You should delete this to prevent them from being included in the build._
+
+
+Docker will process each line in the Dockerfile. The . in the docker build command tells Docker to use the current folder to find a Dockerfile. This command builds the image and creates a local repository named "vlanimage" that points to that image. After this command finishes, run docker images to see a list of images installed:
+
+```shell
+docker images
+```
 
 ## Next
 
@@ -82,5 +83,39 @@ Now, running the docker build command should work and the image is created per i
 
 <a id='appendix-b'></a>
 ## Appendix B : DockerFile Structure
+The Dockerfile file is used by the docker build command to create a container image. This file is a plaintext file named Dockerfile that does not have an extension. Let's see what each line in the DockerFile for the example project does:
+
+The first two commands, "FROM", tells Docker to pull down the .Net Core images that contains the .NET Core runtimes, libraries and SDKs for building and running the application. The images are optimized for running .NET Core apps in production. It's important to make sure that the .Net Core version is matched with the version that has been used by project i.e. Core 2.1
+
+```shell
+FROM mcr.microsoft.com/dotnet/core/runtime:2.1-nanoserver-1809 AS base
+FROM mcr.microsoft.com/dotnet/core/sdk:2.1-nanoserver-1809 AS build
+```
+
+Then on the following lines, docker sets a folder as the base and copies the project and its dependencies into that folder.
+```shell
+WORKDIR /src
+COPY ["VLanMigrate.csproj", ""]
+COPY ["../GenericParsingCore/GenericParsingCore.csproj", "../GenericParsingCore/"]
+RUN dotnet restore "./VLanMigrate.csproj"
+COPY . .
+WORKDIR "/src/."
+```
+Now, using dotnet CLI, it builds and publishes the project in release mode and copies the output into the "app" directory
+```shell
+RUN dotnet build "VLanMigrate.csproj" -c Release -o /app
+
+FROM build AS publish
+RUN dotnet publish "VLanMigrate.csproj" -c Release -o /app
+```
+And finally, copies the publish artifacts built in previous step, into the root folder of the app and set the main assembly file as the entrypoint for the image.
+```shell
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app .
+ENTRYPOINT ["dotnet", "VLanMigrate.dll"]
+```
+
+
 
 ### [AWS Developer Center](https://developer.aws)
