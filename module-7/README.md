@@ -29,9 +29,9 @@ docker images
 _Tip:
 First, If your image repository does not exist in the registry you intend to push to yet, create it. For more information, see [Creating a Repository](https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-create.html)._
 
-What you need from the list, is the "IMAGE ID" column of the vlanimage. Next, tag your image with the ECR registry name you've created:
+What you need from the list, is the "IMAGE ID" column of the vlanimage. Next, tag your image with the ECR repository name you've created:
 ```shell
-docker tag <imageid> aws_account_id.dkr.ecr.region.amazonaws.com/vlanimage
+docker tag <imageid> aws_account_id.dkr.ecr.region.amazonaws.com/<repository>
 ```
 
 Now, push the image to ECR using docker push command. You need to replace the aws_account_id and the region with your own values.
