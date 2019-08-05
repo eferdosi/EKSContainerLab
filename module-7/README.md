@@ -22,9 +22,30 @@ aws ecr get-login --region <region> --no-include-email
 ```
 The output of this command will give you the login command that you need to run to get authenticated. copy and paste the docker login command into the terminal and run it. You should now be authenticated!
 
+Run the following command to find the image that you'll be pushing to ECR. It should have the name 'vlanimage':
+```shell
+docker images
+```
+_Tip:
+First, If your image repository does not exist in the registry you intend to push to yet, create it. For more information, see [Creating a Repository](https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-create.html)._
 
+What you need from the list, is the "IMAGE ID" column of the vlanimage. Next, tag your image with the ECR registry name you've created:
+```shell
+docker tag <imageid> aws_account_id.dkr.ecr.region.amazonaws.com/vlanimage
+```
 
-Follow the [instructions here](https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html) to login, tag and push your Docker image to ECR.
+Now, push the image to ECR using docker push command. You need to replace the aws_account_id and the region with your own values.
+```shell
+docker push <aws_account_id>.dkr.ecr.<region>.amazonaws.com/<repository>
+```
+
+_Tip:
+To find the Account ID, run the following command and the "Account" attribute value, is what you need to copy and paste into the above command:_
+```shell
+aws sts get-caller-identity 
+```
+
+Follow [instructions here](https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html) for full detail on how to login, tag and push your Docker image to ECR.
 
 ### Deploy Docker Image to EKS
 Once you have pushed your image to ECR, you can deploy it to your EKS cluster that you setup in module 2. Kubernetes supports ECR as a private repository, [as detailed here](https://kubernetes.io/docs/concepts/containers/images/#using-aws-ec2-container-registry).
