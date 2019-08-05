@@ -86,16 +86,6 @@ NAME             TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
 svc/kubernetes   ClusterIP   10.100.0.1   <none>        443/TCP   1m
 ```
 
-** NOTE 7/01 : We may be able to use the Kubernetes Dashboard from our Linux AMI.  It does install.  But, how to view the web-page?  I've also sought to install this on our Windows Server instance.  But, haven't gotten that configuration to work. **
-
-## Optional - Deploy the Kubernetes Web UI Dashboard (10 minutes)
-
-Installing the Kubernetes Web UI Dashboard on your client workstation enables you to view your EKS cluster configuration along with job and performance metrics.  
-
-1. Follow the instructions [here](https://docs.aws.amazon.com/eks/latest/userguide/dashboard-tutorial.html) and see corresponding project files at [Github](https://github.com/kubernetes/dashboard).
-
-
-
 That concludes Module 2.
 
 **[Proceed to Module 3](/module-3)**
