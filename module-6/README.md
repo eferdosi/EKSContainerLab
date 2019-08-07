@@ -43,7 +43,7 @@ _To understand the DockerFile structure and why those commands are required in t
 
 Before building the container image, we need to include the input file that is required for the application to run, in the build process. In Visual Studio, in Solutions Explorer, go to the 'TEST-DATA' folder and select the 'SampleVlans.txt' file. then in the project window change the 'Build Action' and 'Copy to output directory' attributes to 'Content' and 'Copy Always'. 
 
-![Adding Input Text File](/images/module-6/AddContentFiles.jpg)
+![Adding Input Text File](/images/module-6/AddContentFiles.JPG)
 
 The next step is to run the application in a container and first thing to do is to create the container image file for the project, using the DockerFile. In Visual Studio, right click on the DockerFile and select 'Build Docker Image'. You can check the output window to see the progress of the Docker build command.
 
