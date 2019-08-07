@@ -20,16 +20,12 @@ Now, rightclick on the 'VLanMigrate' project and select "Add > Docker Support" a
 Visual Studio should have created the Dockerfile under the project that has the following lines:
 
 ``` shell
-#Depending on the operating system of the host machines(s) that will build or run the containers, the image specified in the FROM statement may need to be changed.
-#For more information, please see https://aka.ms/containercompat
-
-FROM mcr.microsoft.com/dotnet/core/runtime:2.1-nanoserver-1809 AS base
+FROM mcr.microsoft.com/dotnet/core/runtime:2.1-stretch-slim AS base
 WORKDIR /app
 
-FROM mcr.microsoft.com/dotnet/core/sdk:2.1-nanoserver-1809 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:2.1-stretch AS build
 WORKDIR /src
 COPY ["VLanMigrate.csproj", ""]
-COPY ["../GenericParsingCore/GenericParsingCore.csproj", "../GenericParsingCore/"]
 RUN dotnet restore "./VLanMigrate.csproj"
 COPY . .
 WORKDIR "/src/."
@@ -45,18 +41,15 @@ ENTRYPOINT ["dotnet", "VLanMigrate.dll"]
 ```
 _To understand the DockerFile structure and why those commands are required in the file, Refer to  <a href="#appendix-b">**Appendix B**</a> for more information._
 
-The next step is to run the application in a container and first thing to do is to create the container image file for the project, using the DockerFile. From your Prompt, go to the project folder where the Dockerfile resides and run the following command:
+Before building the container image, we need to include the input file that is required for the application to run, in the build process. In Visual Studio, in Solutions Explorer, go to the 'TEST-DATA' folder and select the 'SampleVlans.txt' file. then in the project window change the 'Build Action' and 'Copy to output directory' attributes to 'Content' and 'Copy Always'. 
 
-```shell
-docker build -t vlanimage -f Dockerfile .
-```
+![Adding Input Text File](/images/module-6/AddContentFiles.jpg)
 
-Tips:
+The next step is to run the application in a container and first thing to do is to create the container image file for the project, using the DockerFile. In Visual Studio, right click on the DockerFile and select 'Build Docker Image'. You can check the output window to see the progress of the Docker build command.
 
-_The above build command will throw error. The docker command is unable to find the project dependency. Think about how you this issue can be fixed. Refer to  <a href="#appendix-a">**Appendix A**</a> for the solution._
+![Build Docker Image](/images/module-6/BuildDockerImage.jpg)
 
 _You might see errors like 'duplicate assembly information', which is caused by the presence of an AssemblyInfo.cs file in your project having updated from .NET to .NET Core. You should delete this to prevent them from being included in the build._
-
 
 Docker will process each line in the Dockerfile. The . in the docker build command tells Docker to use the current folder to find a Dockerfile. This command builds the image and creates a local repository named "vlanimage" that points to that image. After this command finishes, run docker images to see a list of images installed:
 
@@ -70,17 +63,6 @@ Please proceed to the next lesson.
 
 **[Proceed to Module 7](/module-7)**
 
-<a id='appendix-a'></a>
-## Appendix A : How to fix the docker build  issue?
-
-When running the docker build command, it expects to find all project dependencies in the running context, which in our example is the project folder. To solve this issue, we can move the Dockerfile to one folder up and run the command from that folder. This will resolve the first issue but introduces new errors due to the relative path in the Dockerfile. So, you need to change 2 lines in the Docker file per following:
-
-```shell
-COPY ["vlanmigrate/VLanMigrate.csproj", ""]
-COPY ["GenericParsingCore/GenericParsingCore.csproj", "../GenericParsingCore/"]
-```
-Now, running the docker build command should work and the image is created per instruction.
-
 <a id='appendix-b'></a>
 ## Appendix B : DockerFile Structure
 The Dockerfile file is used by the docker build command to create a container image. This file is a plaintext file named Dockerfile that does not have an extension. Let's see what each line in the DockerFile for the example project does:
@@ -88,15 +70,14 @@ The Dockerfile file is used by the docker build command to create a container im
 The first two commands, "FROM", tells Docker to pull down the .Net Core images that contains the .NET Core runtimes, libraries and SDKs for building and running the application. The images are optimized for running .NET Core apps in production. It's important to make sure that the .Net Core version is matched with the version that has been used by project i.e. Core 2.1
 
 ```shell
-FROM mcr.microsoft.com/dotnet/core/runtime:2.1-nanoserver-1809 AS base
-FROM mcr.microsoft.com/dotnet/core/sdk:2.1-nanoserver-1809 AS build
+FROM mcr.microsoft.com/dotnet/core/runtime:2.1-stretch-slim AS base
+FROM mcr.microsoft.com/dotnet/core/sdk:2.1-stretch AS build
 ```
 
-Then on the following lines, docker sets a folder as the base and copies the project and its dependencies into that folder.
+Then on the following lines, docker sets a folder as the base and copies the project into that folder.
 ```shell
 WORKDIR /src
 COPY ["VLanMigrate.csproj", ""]
-COPY ["../GenericParsingCore/GenericParsingCore.csproj", "../GenericParsingCore/"]
 RUN dotnet restore "./VLanMigrate.csproj"
 COPY . .
 WORKDIR "/src/."
@@ -115,7 +96,6 @@ WORKDIR /app
 COPY --from=publish /app .
 ENTRYPOINT ["dotnet", "VLanMigrate.dll"]
 ```
-
 
 
 ### [AWS Developer Center](https://developer.aws)
