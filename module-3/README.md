@@ -9,7 +9,7 @@
 
 ## Overview
 
-In this module, we will use AWS EC2 to launch and configure our Windows Server 2019 Dev Environment.
+In this module, we will use AWS EC2 to launch and configure our Windows Server 2019 Dev Environment. You can perform all followings on your local Windows desktop or laptop and skip provisioning the new EC2 instance.
 
 <a id='dev-env'></a>
 ### Your Windows Development Environment
@@ -26,13 +26,13 @@ Your Windows workstation environment needs to have the following tools configura
 
 **Your Windows Workstation - A Remote AWS Windows Server 2019 AMI Instance**
 
-1. For this lab, we utilize an EC2 hosted **Microsoft Windows Server 2019 Base with Containers** instance.  This Amazon Machine Image (AMI) is preconfigured to support Docker Containers.
+1. For this lab, we utilize an EC2 hosted **Microsoft Windows Server 2019 Base with Containers** bare-metal instance. This Amazon Machine Image (AMI) is preconfigured to support Docker Containers. We will use bare-metal because we need the physical machine to run the Docker with Linux Daemon. 
 2. Don't know how to create an EC2 instance?  Please refer to step-wise documentation at (https://aws.amazon.com/getting-started/tutorials/launch-a-virtual-machine/). 
 3. When creating your AMI instance, **be sure to choose an attached disk size of 60 GByte**.  The default of 30 GByte may be too small to contain our software packages.
-4. When creating your AMI instance, be sure to select the **Microsoft Windows Server 2019 Base with Containers** AMI-type.  We recommend utilizing a **t2.xlarge** or better host-machine type. 
+4. When creating your AMI instance, be sure to select the **Microsoft Windows Server 2019 Base with Containers** AMI-type.  We recommend utilizing a **i3.metal** host-machine type. 
 5. Refer to  <a href="#appendix-a">**Appendix A**</a> herein for instructions on accessing your AMI instance via Remote Desktop Protocol (RDP). 
 
-**Proceed with installation of the following tools only after completion of the above EC2 instance creation.  Lab instructions are to be executed from a RDP client application connection to that EC2 instance.**
+**Proceed with installation of the following tools only after completion of the above EC2 instance creation. Lab instructions are to be executed from a RDP client application connection to that EC2 instance.**
 
 ![Windows Server 2019 AMI](/images/module-3/WindowsServer2019-AMI-1.jpg)
 
@@ -46,13 +46,6 @@ We herein provide guidance on manual configuration of your Windows Server 2019 w
 1. Login to your Windows Server 2019 Dev Environment per <a href="#appendix-a">**Appendix A**</a>. 
 2. Select the `Start` menu and type `update`.  
 3. Follow the *Check for Update* control panel instructions.
-
-### (Optional) Install the FireFox Web Browser
-
-1. Use the Windows Server *Server Manager* application (accessible from the Start menu) which should be displayed automatically upon logon.
-2. Select the *Local Server* from the left-side panel.
-3. Scroll down to the *Properties* section.  Find the *IE Enhanced Security Configuration* and select the *Off* setting.
-4. Open the *Internet Explorer* application.  Browse to *https://www.mozilla.org/firefox* and select the *Download Firefox* option.
 
 ### Install Visual Studio 2019 Community Edition
 
@@ -76,37 +69,27 @@ We herein provide guidance on manual configuration of your Windows Server 2019 w
 
 1.  See how to configure the AWS Toolkit for Visual Studio with your AWS Account Credentials [here](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/credentials.html).
 
-### (Optional) Install the Cmder Utility
-
-1. Download the *full package* from https://cmder.net
-2. Unzip to *c:\cmder* and configure a Desktop short-cut to *c:\cmder\Cmder.exe*.
-
 ### Install the AWS Command Line Tools
 
 1. Browse to https://aws.amazon.com/cli and select the 64-bit option from the Windows download section (upper right-side of the page).
 2. Open a Command Shell (or open Cmder.exe) and configure the AWS CLI with your AWS account credentials.  See guidance [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html).
 3. Ensure that your selected region matches the one provided within your Visual Studio configuration above.
 
+### Install Docker Desktop
+1. Download the installer file from https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe
+2. Follow the installation prompts and complete the installation.
 
-**NOTE 7/01 : THE DASHBOARD DOESN'T SEEM TO INSTALL ON WINDOWS. DEBUG FURTHER. **
+### (Optional) Install the Cmder Utility
 
-## Optional - Deploy the Kubernetes Web UI Dashboard (15 minutes)
+1. Download the *full package* from https://cmder.net
+2. Unzip to *c:\cmder* and configure a Desktop short-cut to *c:\cmder\Cmder.exe*.
 
-Installing the Kubernetes Web UI Dashboard on your Windows Server workstation enables you to view your EKS cluster configuration along with job and performance metrics.  The Dashboard requires pre-installation of the Kubernetes command line utility named `kubectl` which enables communication with your EKS cluster API server.
+### (Optional) Install the FireFox Web Browser
 
-1. Install [kubectl](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html) for Windows.
-
-``` shell
-curl -o kubectl.exe https://amazon-eks.s3-us-west-2.amazonaws.com/1.13.7/2019-06-11/bin/windows/amd64/kubectl.exe
-```
-``` shell
-kubectl version --short --client
-```
-
-2. Follow the instructions [here](https://docs.aws.amazon.com/eks/latest/userguide/dashboard-tutorial.html) and see corresponding project files at [Github](https://github.com/kubernetes/dashboard).
-
-
-
+1. Use the Windows Server *Server Manager* application (accessible from the Start menu) which should be displayed automatically upon logon.
+2. Select the *Local Server* from the left-side panel.
+3. Scroll down to the *Properties* section.  Find the *IE Enhanced Security Configuration* and select the *Off* setting.
+4. Open the *Internet Explorer* application.  Browse to *https://www.mozilla.org/firefox* and select the *Download Firefox* option.
 
 That concludes Module 3.
 
