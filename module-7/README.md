@@ -37,9 +37,9 @@ Double-click on the repository name and in the new window you can see the image 
 
 ![Repository Detail](/images/module-7/PublishContainer4.jpg)
 
-_Tip:
+_Tip:_
 
-All of the above steps can be done via AWS CLI in Command Line. Follow [instructions here](https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html) for full detail on how to login, tag and push your Docker image to ECR.
+_All of the above steps can be done via AWS CLI in Command Line. Follow [instructions here](https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html) for full detail on how to login, tag and push your Docker image to ECR._
 
 ### Deploy Docker Image to EKS
 Once you have pushed your image to ECR, you can deploy it to your EKS cluster that you setup in module 2. Kubernetes supports ECR as a private repository, [as detailed here](https://kubernetes.io/docs/concepts/containers/images/#using-aws-ec2-container-registry).
