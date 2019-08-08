@@ -15,12 +15,27 @@ From the previous module, you should have obtained a Docker image that you are r
 
 ### Push Docker Image to ECR
 
-First, to be able to access the ECR from the command line, you need to authenticate Docker to the ECR registry. There are 2 methods for authentication that can be found [here](https://docs.aws.amazon.com/AmazonECR/latest/userguide/Registries.html#registry_auth). We use the 'get-login' method to obtain the login command. Run the following in the Command Line window and replace the <region> with the region that you want to create ECR repository:
+Accessing the ECR and pushing images into the repository can be done in two different methods. AWS CLI via Command Line or AWS Toolkit for Visual Studio. In this module we use the AWS Toolkit for Visual Studio.
 
-```shell
-aws ecr get-login --region <region> --no-include-email
-```
-The output of this command will give you the login command that you need to run to get authenticated. copy and paste the docker login command into the terminal and run it. You should now be authenticated!
+In Visual Studio, right click on the VLanMigrate project and select 'Publish Container to AWS':
+
+![Publish Container to AWS](/images/module-7/PublishContainer1.jpg)
+
+This will open the publish window where you need to enter a few parameters as below:
+1. __Region__: the region that your image repository will be created.
+2. __Docker Repository__: the repository name
+3. __Tag__: Docker Image Tag (Optional). If you leave it blank, it will be set to 'latest'
+4. __Deployment Target__: click on the list and choose 'Push only docker image to the Amazon Elastic Container Registry'
+
+![Publish Container to AWS](/images/module-7/PublishContainer2.jpg)
+
+Now, click on the 'Publish' command and the process should be completed quickly. Once finished, open the 'AWS Toolkit' window from the 'View > AWS Toolkit' menu and on the tree, expand 'Amazon Elastic Container Service > Repositories' and you should see your newly created image. 
+
+![AWS Toolkit](/images/module-7/PublishContainer3.jpg)
+
+Double-click on the repository name and in the new window you can see the image detail including the URL that we will use it later to push to EKS.
+
+![Repository Detail](/images/module-7/PublishContainer4.jpg)
 
 Run the following command to find the image that you'll be pushing to ECR. It should have the name 'vlanimage':
 ```shell
