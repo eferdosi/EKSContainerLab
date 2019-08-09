@@ -9,7 +9,10 @@
 
 ## Overview
 
-In this module, we will use AWS EC2 to launch and configure our Windows Server 2019 Dev Environment. You can perform all followings on your local Windows desktop or laptop and skip provisioning the new EC2 instance.
+In this module, we will use AWS EC2 to launch and configure our Windows Server 2019 Dev Environment. We use this environment to run tools required to build the project and push the container image to the ECR. 
+
+_Tip:_
+_If you have a Windows laptop, you can run it form your local and you don't need to provision the EC2 instance. Just make sure that you have all following tools installed._
 
 <a id='dev-env'></a>
 ### Your Windows Development Environment
@@ -21,15 +24,14 @@ Your Windows workstation environment needs to have the following tools configura
 3. AWS Tools for Visual Studio (https://aws.amazon.com/developer/language/net/tools/)
 4. AWS Command Line Tools (aws)  (https://aws.amazon.com/cli/)
 5. .NET Portability Analyzer (https://marketplace.visualstudio.com/items?itemName=ConnieYau.NETPortabilityAnalyzer)
-6. Cmder (https://cmder.net) 
-
+6. Docker Desktop (docker-compose) (https://docs.docker.com/compose/overview/)
 
 **Your Windows Workstation - A Remote AWS Windows Server 2019 AMI Instance**
 
-1. For this lab, we utilize an EC2 hosted **Microsoft Windows Server 2019 Base with Containers** bare-metal instance. This Amazon Machine Image (AMI) is preconfigured to support Docker Containers. We will use bare-metal because we need the physical machine to run the Docker with Linux Daemon. 
+1. For this lab, we utilize a bare-metal EC2 hosted **Microsoft Windows Server 2019 Base with Containers** instance. This Amazon Machine Image (AMI) is preconfigured to support Docker Containers. Docker can't be run on any other instance type than bare metal, due to the nested virtualization issue on EC2 instance that prevents the Docker Daemon to switch to Linux engine. So, the bare-metal instnce is the  because we need the physical machine to run the Docker with Linux Daemon. 
 2. Don't know how to create an EC2 instance?  Please refer to step-wise documentation at (https://aws.amazon.com/getting-started/tutorials/launch-a-virtual-machine/). 
 3. When creating your AMI instance, **be sure to choose an attached disk size of 60 GByte**.  The default of 30 GByte may be too small to contain our software packages.
-4. When creating your AMI instance, be sure to select the **Microsoft Windows Server 2019 Base with Containers** AMI-type.  We recommend utilizing a **i3.metal** host-machine type. 
+4. When creating your AMI instance, be sure to select the **Microsoft Windows Server 2019 Base with Containers** AMI-type. We recommend utilizing a **i3.metal** or **m5.metal** host-machine type. 
 5. Refer to  <a href="#appendix-a">**Appendix A**</a> herein for instructions on accessing your AMI instance via Remote Desktop Protocol (RDP). 
 
 **Proceed with installation of the following tools only after completion of the above EC2 instance creation. Lab instructions are to be executed from a RDP client application connection to that EC2 instance.**
@@ -78,18 +80,6 @@ We herein provide guidance on manual configuration of your Windows Server 2019 w
 ### Install Docker Desktop
 1. Download the installer file from https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe
 2. Follow the installation prompts and complete the installation.
-
-### (Optional) Install the Cmder Utility
-
-1. Download the *full package* from https://cmder.net
-2. Unzip to *c:\cmder* and configure a Desktop short-cut to *c:\cmder\Cmder.exe*.
-
-### (Optional) Install the FireFox Web Browser
-
-1. Use the Windows Server *Server Manager* application (accessible from the Start menu) which should be displayed automatically upon logon.
-2. Select the *Local Server* from the left-side panel.
-3. Scroll down to the *Properties* section.  Find the *IE Enhanced Security Configuration* and select the *Off* setting.
-4. Open the *Internet Explorer* application.  Browse to *https://www.mozilla.org/firefox* and select the *Download Firefox* option.
 
 That concludes Module 3.
 
