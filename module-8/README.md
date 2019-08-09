@@ -43,18 +43,23 @@ Connect to Linux workstation that you setup in very first module, using the ssh 
 kubectl get svc
 kubectl get nodes
 ```
-
 Now, using the kubectl apply command and given yaml file, we will run the application in the cluster:
 
 ```shell
 kubectl apply -f <Image url in ECR>
 ```
-By running this command, a deployment will start and new Pod with the given container image will be run. To see the pods run the following command:
+By running this command, a deployment will start and new Pod with the given container image will be run. Now, Let's test the application and see the output.
+
+### Test the Application
+
+Previous command will create a Pod in our cluster. A Pod is a group of one or more containers (such as Docker containers), with shared storage/network, and a specification for how to run the containers. You can find more details [here](https://kubernetes.io/docs/concepts/workloads/pods/pod/#what-is-a-pod).
+
+To see the pods created from the previous command, run the following command:
 
 ```shell
 kubectl get pods
 ```
-in the output, you should see the 'vlanmigrateapp' pod with status 'Completed'. That means that app has run and completed successfully. Please note that this is a console application and will terminate upon completion. For other application types, such as web services, the status will be 'Running'.
+in the output, you should see the 'vlanmigrateapp' pod with status 'Completed'. That means that app has run and completed successfully. Note that this is a console application and will terminate upon completion. For other application types, such as web services, the status will be 'Running', that means the app has been deployed successfully and running.
 
 To see the output of the console application, run the following command:
 
@@ -66,6 +71,5 @@ The output should be similar to what you saw whe run the application in Visual S
 ![Log Outputs](/images/module-7/Output.jpg)
 
 ## Congratulations, You have successfully completed the migration of a .NET application and deployed it onto EKS.##
-
 
 ### [AWS Developer Center](https://developer.aws)
