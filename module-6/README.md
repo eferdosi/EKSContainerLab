@@ -14,7 +14,7 @@ If you are new to Docker or using Docker with .NET, it is recommended to read [t
 
 Firstly, install [Visual Studio Tools for Docker](https://docs.microsoft.com/en-us/dotnet/standard/containerized-lifecycle-architecture/design-develop-containerized-apps/visual-studio-tools-for-docker) which will allow you to access Docker tooling from within Visual Studio.
 
-Now, rightclick on the 'VLanMigrate' project and select "Add > Docker Support" and from the options in the list select "Windows". 
+Now, rightclick on the 'VLanMigrate' project and select "Add > Docker Support" and from the options in the list select "Linux". 
 ![Adding Docker support from Visual Studios](/images/module-6/AddDockerSupport-2.jpg)
 
 Visual Studio should have created the Dockerfile under the project that has the following lines:
@@ -49,9 +49,7 @@ The next step is to run the application in a container and first thing to do is 
 
 ![Build Docker Image](/images/module-6/BuildDockerImage.jpg)
 
-_You might see errors like 'duplicate assembly information', which is caused by the presence of an AssemblyInfo.cs file in your project having updated from .NET to .NET Core. You should delete this to prevent them from being included in the build._
-
-Docker will process each line in the Dockerfile. The . in the docker build command tells Docker to use the current folder to find a Dockerfile. This command builds the image and creates a local repository named "vlanimage" that points to that image. After this command finishes, run docker images to see a list of images installed:
+Docker will process each line in the Dockerfile. This command builds the image named "vlanimage" in the local repository. After this command finishes, run docker images in the command prompt window to see a list of images installed:
 
 ```shell
 docker images
