@@ -1,11 +1,8 @@
-# Module 8 - Test Your Application on EKS
-
+# Module 8 - Deploy Application to Elastic Kubernetes Service (EKS)
 
 **Time to complete:** 20 minutes
 
 **Services used:**
-
-- Elastic Container Registry (ECR)
 
 - Elastic Kubernetes Service (EKS)
 
@@ -13,53 +10,62 @@
 
 ### Overview
 
-In this module, we will test our application to check if it is running properly on our EKS cluster.
+In this module, we will deploy our application to the EKS Cluster and test it to check if it run properly on our EKS cluster.
 
-In order to check application output, you can view the logs from pods.
+### Deploy Docker Image to EKS
+Once you have pushed your image to ECR, you can deploy it to your EKS cluster that you setup in module 2. Kubernetes supports ECR as a private repository, [as detailed here](https://kubernetes.io/docs/concepts/containers/images/#using-aws-ec2-container-registry).
 
-To get the name of the pods running on your nodes, use the "kubectl get pods" command.
+To deploy the image onto EKS, we need to first create the YAML file that contains the Pod configuration, then upload that file into a location that can be accessed by EKS cluster and finally run the application in EKS cluster.
 
-Pass the name of the pod into the "kubectl logs" command to see the output.
+To start, create a yaml file with following lines and save it into your local machine as 'eks-config.yaml'. Please note that you need to replace the 'image' attribute with your image URL in ECR. 
 
-### Defining arguments
-
-To test our application properly, we'd want to pass in the same arguments as we did when the application was running on our local machine.
-
-Create a YAML file that specifies the path to the text file with the input VLAN IDs.
-
-~~~~
-
+```shell
 apiVersion: v1
 kind: Pod
 metadata:
-  name: command-demo
+  name: vlanmigrateapp
   labels:
     purpose: demonstrate-command
 spec:
   containers:
-  - name: command-demo-container
-    image: <Your ECR image path>
-    command: ["dotnet"]
-     args: ["-f", "TEST-DATA/SampleVLANs.txt","-e",TEST-DATA/Exceptions0001.log","-o","TEST-DATA/Router001.txt","-p","TEST-DATA/Router002.txt"]
+  - name: vlan-test-container
+    image: <Image URL in ECR>
+    imagePullPolicy: Always
+    args: ["-f","TEST-DATA/SampleVLANs.txt","-e",TEST-DATA/Exceptions0001.log","-o","TEST-DATA/Router001.txt","-p","TEST-DATA/Router002.txt","-r","false"]
   restartPolicy: OnFailure
+```
 
-~~~~
+Next, upload the file into a s3 bucket and make sure that the file is available to public. This is not a recommended method to be used in production environment, but for the purpose of this workshop, we make the file public.
 
-Upload this file as command.yaml to an S3 bucket, and allow it to be accessed from the Kubernetes pods.
+Connect to Linux workstation that you setup in very first module, using the ssh command. You already have configured the EKS cluster and nodes on this instance which can be listed using these commands:
 
-Create a Pod based on the YAML configuration file:
+```shell
+kubectl get svc
+kubectl get nodes
+```
 
-kubectl apply -f INSERT_URL
+Now, using the kubectl apply command and given yaml file, we will run the application in the cluster:
 
-Once the pod has been created, you can inspect the logs by running
+```shell
+kubectl apply -f <Image url in ECR>
+```
+By running this command, a deployment will start and new Pod with the given container image will be run. To see the pods run the following command:
 
-_kubectl logs command-demo_
+```shell
+kubectl get pods
+```
+in the output, you should see the 'vlanmigrateapp' pod with status 'Completed'. That means that app has run and completed successfully. Please note that this is a console application and will terminate upon completion. For other application types, such as web services, the status will be 'Running'.
 
-You should now see the program output, just as if you were running it locally.
+To see the output of the console application, run the following command:
 
-## Next
+```shell
+kubectl log vlanmigrateapp
+```
+The output should be similar to what you saw whe run the application in Visual Studio. 
 
-### Congratulations, You have successfully completed the migration of a .NET application and deployed it onto EKS.
+![Log Outputs](/images/module-7/Output.jpg)
+
+## Congratulations, You have successfully completed the migration of a .NET application and deployed it onto EKS.##
 
 
 ### [AWS Developer Center](https://developer.aws)
