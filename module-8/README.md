@@ -1,4 +1,4 @@
-# Module 8 - Deploy Application to Elastic Kubernetes Service (EKS)
+# Module 8 - Deploy Application to Elastic Kubernetes Service (EKS) 
 
 **Time to complete:** 20 minutes
 
