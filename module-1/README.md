@@ -14,8 +14,6 @@ In this module, we will use AWS EC2 to launch and configure our Linux Dev Enviro
 <a id='dev-env'></a>
 ### Your Linux Dev Environment
 
-**NOTE, 7/01 : We may need to utilize an Ubuntu based AMI instead in order to utilize the [Kubernetes Dashboard](https://docs.aws.amazon.com/eks/latest/userguide/dashboard-tutorial.html).  I'm having some difficulty getting this application to install on our Windows Server 2019 AMI. **
-
 Your Linux workstation environment needs to have the following tools configuration.
 
 **A Dev-Environment with the following development tools.** 
