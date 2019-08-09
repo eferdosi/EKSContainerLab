@@ -75,7 +75,7 @@ PM> Install-Package Microsoft.Windows.Compatibility
 
 Please proceed to the next lesson.
 
-**[Proceed to Module 6](../module-6/README.MD)**
+**[Proceed to Module 6](../module-6/README.md)**
 
 
 ### [AWS Developer Center](https://developer.aws)

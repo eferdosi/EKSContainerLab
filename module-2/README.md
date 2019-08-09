@@ -88,7 +88,7 @@ svc/kubernetes   ClusterIP   10.100.0.1   <none>        443/TCP   1m
 
 That concludes Module 2.
 
-**[Proceed to Module 3](../module-3/README.MD)**
+**[Proceed to Module 3](../module-3/README.md)**
 
 
 ### [AWS Developer Center](https://developer.aws)

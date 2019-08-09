@@ -59,7 +59,7 @@ docker images
 
 Please proceed to the next lesson.
 
-**[Proceed to Module 7](../module-7/README.MD)**
+**[Proceed to Module 7](../module-7/README.md)**
 
 <a id='appendix-b'></a>
 ## Appendix B : DockerFile Structure

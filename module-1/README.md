@@ -148,7 +148,7 @@ aws configure
 
 Please proceed to the next lesson.
 
-**[Proceed to Module 2](../module-2)**
+**[Proceed to Module 2](../module-2/README.md)**
 
 
 <a id='appendix-a'></a>

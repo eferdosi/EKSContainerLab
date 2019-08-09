@@ -83,7 +83,7 @@ We herein provide guidance on manual configuration of your Windows Server 2019 w
 
 That concludes Module 3.
 
-**[Proceed to Module 4](../module-4/README.MD)**
+**[Proceed to Module 4](../module-4/README.md)**
 
 
 <a id='appendix-a'></a>
