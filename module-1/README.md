@@ -11,7 +11,6 @@
 
 In this module, we will use AWS EC2 to launch and configure our Linux Dev Environment.
 
-
 <a id='dev-env'></a>
 ### Your Linux Dev Environment
 
@@ -153,9 +152,7 @@ aws configure
 
 Please proceed to the next lesson.
 
-**[Proceed to Module 2](/module-2)**
-
-
+**[Proceed to Module 2](../module-2/README.MD)**
 
 
 <a id='appendix-a'></a>

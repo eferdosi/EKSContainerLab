@@ -91,7 +91,7 @@ The solution files include a `DEMO` subfolder with a prebuilt version of this ap
 
 Please proceed to the next lesson.
 
-**[Proceed to Module 5](/module-5)**
+**[Proceed to Module 5](../module-5/README.MD)**
 
 
 ### [AWS Developer Center](https://developer.aws)

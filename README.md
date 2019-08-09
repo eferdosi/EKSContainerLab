@@ -24,14 +24,14 @@ This article illustrates application [modernization](https://docs.microsoft.com/
 
 ### Topical Agenda by Modules
 
-* [Module 1 - Configure your Linux Dev Environment](/module-1)
-* [Module 2 - Configure your EKS Cluster](/module-2)
-* [Module 3 - Configure your Windows Server Dev Environment](/module-3)
-* [Module 4 - Build the Sample .NET Application](/module-4)
-* [Module 5 - Enable .NET Core Application Compatibility](/module-5)
-* [Module 6 - Dockerize the Sample Application](/module-6)
-* [Module 7 - Deploy the Sample Application to your EKS Cluster](/module-7)
-* [Module 8 - Test the Application](/module-8)
+* [Module 1 - Configure your Linux Dev Environment](./module-1/README.MD)
+* [Module 2 - Configure your EKS Cluster](./module-2/README.MD)
+* [Module 3 - Configure your Windows Server Dev Environment](./module-3/README.MD)
+* [Module 4 - Build the Sample .NET Application](./module-4/README.MD)
+* [Module 5 - Enable .NET Core Application Compatibility](./module-5/README.MD)
+* [Module 6 - Dockerize the Sample Application](./module-6/README.MD)
+* [Module 7 - Deploy the Sample Application to your EKS Cluster](./module-7/README.MD)
+* [Module 8 - Test the Application](./module-8/README.MD)
 
 
 ### Workshop Clean-Up (Once Complete)
@@ -56,7 +56,7 @@ To remove all of the created resources, you can visit the following AWS Consoles
 
 ## Begin the Workshop
 
-**[Proceed to Module 1](/module-1)**
+**[Proceed to Module 1](./module-1/README.MD)**
 
 
 ### [AWS Developer Center](https://developer.aws)

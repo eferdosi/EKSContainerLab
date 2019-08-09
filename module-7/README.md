@@ -96,4 +96,6 @@ The output should be similar to what you saw whe run the application in Visual S
 
 ## Congratulations, You have successfully completed the migration of a .NET application and deployed it onto EKS.##
 
+**[Proceed to Module 8](../module-8/README.MD)**
+
 ### [AWS Developer Center](https://developer.aws)
