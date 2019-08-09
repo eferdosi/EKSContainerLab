@@ -49,6 +49,15 @@ The next step is to run the application in a container and first thing to do is 
 
 ![Build Docker Image](/images/module-6/BuildDockerImage.jpg)
 
+**Note:**
+Visual Studio will ask you to switch to Liux containers to be able to process the DockerFile. Switching the Docker engine can also be done via following methods:
+1. Docker Desktop: Click on the Docker icon in the tray area and choose 'Switch to Linux Container' option.
+2. DockerCli: In the command prompt run the following command:
+```shell
+"C:\Program Files\Docker\Docker\DockerCli.exe" -SwitchLinuxEngine
+```
+Visual Studio uses the DockerCli command to perform the engine switch!
+
 Docker will process each line in the Dockerfile. This command builds the image named "vlanimage" in the local repository. After this command finishes, run docker images in the command prompt window to see a list of images installed:
 
 ```shell
