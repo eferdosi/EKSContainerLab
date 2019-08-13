@@ -31,7 +31,7 @@ cd c:\myprojects
 2. Download the project files. 
 
 ``` shell 
-curl -L -o VLanMigrationProject.zip https://github.com/RecursiveLoop/EKSContainerLab/blob/master/module-4/source/VLanMigrationProject.zip?raw=true
+curl -L -o VLanMigrationProject.zip https://github.com/eferdosi/EKSContainerLab/blob/master/module-4/source/VLanMigrationProject.zip?raw=true
 ```
 
 3. unzip the project
