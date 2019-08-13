@@ -30,8 +30,8 @@ This article illustrates application [modernization](https://docs.microsoft.com/
 * [Module 4 - Build the Sample .NET Application](./module-4/README.md)
 * [Module 5 - Enable .NET Core Application Compatibility](./module-5/README.md)
 * [Module 6 - Dockerize the Sample Application](./module-6/README.md)
-* [Module 7 - Deploy the Sample Application to your EKS Cluster](./module-7/README.md)
-* [Module 8 - Test the Application](./module-8/README.md)
+* [Module 7 - Push Docker Image to ECR](./module-7/README.md)
+* [Module 8 - Deploy Application to Elastic Kubernetes Service (EKS)](./module-8/README.md)
 
 
 ### Workshop Clean-Up (Once Complete)
