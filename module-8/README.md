@@ -46,7 +46,7 @@ kubectl get nodes
 Now, using the kubectl apply command and given yaml file, we will run the application in the cluster:
 
 ```shell
-kubectl apply -f <Image url in ECR>
+kubectl apply -f <S3 Url for Yaml file>
 ```
 By running this command, a deployment will start and new Pod with the given container image will be run. Now, Let's test the application and see the output.
 
