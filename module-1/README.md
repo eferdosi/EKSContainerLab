@@ -71,7 +71,7 @@ sudo amazon-linux-extras install nginx1.12
 6. Install Docker Compose for testing our containers via localhost. Ensure that `docker-compose` has the execute attribute enabled.
 ``` shell
 sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 7. Logout and login again in order to effect the `ec2-user` user group privilege change made previously.  Use the up-arrow to pull-up a previous `login` command line.
